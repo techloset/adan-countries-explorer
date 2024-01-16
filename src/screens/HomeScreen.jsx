@@ -15,6 +15,7 @@ import {
 import {gql, useQuery} from '@apollo/client';
 import ratio from '../libs/ratio';
 import {Color} from '../style/gobalStyle';
+import {ScreenNames} from '../navigation/Screen';
 
 const LIST_COUNTRIES = gql`
   {
@@ -70,7 +71,9 @@ const HomeScreen = ({navigation}) => {
   const renderItem = ({item}) => (
     <TouchableOpacity
       style={styles.countryItem}
-      onPress={() => navigation.navigate('Country', {country: item})}>
+      onPress={() =>
+        navigation.navigate(`${ScreenNames.COUNTRY}`, {country: item})
+      }>
       <Text style={styles.countryName}>{item.name}</Text>
       <View>
         <Text style={styles.Emoji}>{item?.emoji}</Text>

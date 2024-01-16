@@ -1,21 +1,25 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import HomeScreen from '../screens/HomeScreen';
-import CountryScreen from '../screens/CountryScreen';
-import { ApolloProvider,client } from '../context/AppoloClient';
+import {ApolloProvider, client} from '../context/AppoloClient';
+import {StackScreens} from './Screen';
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
   return (
     <ApolloProvider client={client}>
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Home" component={HomeScreen} /> 
-        <Stack.Screen name="Country" component={CountryScreen} /> 
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          {StackScreens.map(screen => (
+            <Stack.Screen
+              key={screen.name}
+              name={screen.name}
+              component={screen.component}
+            />
+          ))}
         </Stack.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
     </ApolloProvider>
   );
 };
