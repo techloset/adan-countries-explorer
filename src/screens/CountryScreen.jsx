@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   View,
   Text,
@@ -13,6 +14,7 @@ import {Color} from '../style/gobalStyle';
 
 const CountryScreen = ({navigation, route}) => {
   const {country} = route.params;
+
   return (
     <View style={styles.ScreenContainer}>
       <StatusBar backgroundColor={Color.slate} />
@@ -55,14 +57,27 @@ const CountryScreen = ({navigation, route}) => {
                 </View>
               </View>
             </View>
-
             <View style={styles.ObjectContainer}>
               <View style={styles.PropContainer}>
                 <View style={styles.Question}>
-                  <Text>currency</Text>
+                  <Text>Currency</Text>
                 </View>
                 <View style={styles.Answer}>
                   <Text>{country?.currency}</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.ObjectContainer}>
+              <View style={styles.PropContainer}>
+                <View style={styles.Question}>
+                  <Text>Languages</Text>
+                </View>
+                <View style={styles.Answer}>
+                  {country?.languages.map((lang, index) => (
+                    <View key={index} style={styles.LanguageContainer}>
+                      <Text style={styles.LanguageText}>{lang.name}</Text>
+                    </View>
+                  ))}
                 </View>
               </View>
             </View>
@@ -143,6 +158,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: ratio.widthPixel(20),
     paddingVertical: ratio.heightPixel(10),
     borderWidth: ratio.widthPixel(1),
+  },
+  LanguageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: ratio.heightPixel(5),
+  },
+  FlagImage: {
+    width: ratio.widthPixel(20),
+    height: ratio.heightPixel(20),
+    marginRight: ratio.widthPixel(10),
+  },
+  LanguageText: {
+    fontSize: ratio.fontPixel(16),
+    color: Color.white,
   },
 });
 
